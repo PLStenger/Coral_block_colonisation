@@ -11,7 +11,7 @@
 # WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/01_raw_data/Original_reads_18S
 # OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/02_quality_check/Original_reads_18S
 
-WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/01_raw_data/Original_reads_TUFA
+WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/01_raw_data/Original_reads_TUFA/Reads
 OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/02_quality_check/Original_reads_TUFA
 
 # Make the directory (mkdir) only if not existe already(-p)
