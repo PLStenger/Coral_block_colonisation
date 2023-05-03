@@ -8,8 +8,8 @@
 # WORKING_DIRECTORY=/scratch_vol1/fungi/BioIndic_La_Reunion_Island_Lagoon/03_cleaned_data/Original_reads_16S
 # OUTPUT=/scratch_vol1/fungi/BioIndic_La_Reunion_Island_Lagoon/04_quality_check/Original_reads_16S
 
-WORKING_DIRECTORY=/scratch_vol1/fungi/BioIndic_La_Reunion_Island_Lagoon/03_cleaned_data/Original_reads_TUFA
-OUTPUT=/scratch_vol1/fungi/BioIndic_La_Reunion_Island_Lagoon/04_quality_check/Original_reads_TUFA
+WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/03_cleaned_data/Original_reads_TUFA
+OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/04_quality_check/Original_reads_TUFA
 
 # Make the directory (mkdir) only if not existe already(-p)
 mkdir -p $OUTPUT
