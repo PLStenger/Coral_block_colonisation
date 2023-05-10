@@ -26,7 +26,7 @@ qiime diversity alpha-rarefaction \
   --i-table core/Table.qza \
   --i-phylogeny tree/rooted-tree.qza \
   --p-max-depth 143037 \
-  --p-min-depth 43262 \
+  --p-min-depth 1 \
   --m-metadata-file $DATABASE/sample-metadata.tsv \
   --o-visualization visual/alpha-rarefaction.qzv
   
