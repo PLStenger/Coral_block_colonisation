@@ -120,10 +120,10 @@ echo $TMPDIR
 ################################################################################################
 # Ceci fonctionne, mais pour eviter de rereunner, j'enleve ici poru test
 
-#qiime rescript get-ncbi-data \
-#    --p-query '(tufA[ALL] OR TufA[ALL] OR TUFA[ALL] OR tufa[ALL] NOT bacteria[ORGN]))' \
-#    --o-sequences taxonomy/RefTaxo.qza \
-#    --o-taxonomy taxonomy/DataSeq.qza
+qiime rescript get-ncbi-data \
+    --p-query '(tufA[ALL] OR TufA[ALL] OR TUFA[ALL] OR tufa[ALL] NOT bacteria[ORGN]))' \
+    --o-sequences taxonomy/RefTaxo.qza \
+    --o-taxonomy taxonomy/DataSeq.qza
 
 
 #qiime feature-classifier classify-consensus-blast \
