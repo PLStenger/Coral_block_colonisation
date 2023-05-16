@@ -31,7 +31,7 @@ echo $TMPDIR
 
 
  qiime taxa barplot \
-  --i-table core/Table.qza \
+  --i-table core/ConTable.qza \
   --i-taxonomy taxonomy/taxonomy_reads-per-batch_RarRepSeq_vsearch.qza \
   --m-metadata-file $DATABASE/sample-metadata.tsv \
   --o-visualization taxonomy/taxa-bar-plots_reads-per-batch_RarRepSeq_vsearch.qzv 
