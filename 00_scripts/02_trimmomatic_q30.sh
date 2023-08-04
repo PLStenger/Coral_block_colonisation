@@ -24,8 +24,8 @@
 ## ####################################################
 ## 
 
-WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/01_raw_data/Original_reads_TUFA/Reads
-OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/03_cleaned_data/Original_reads_TUFA
+WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/01_raw_data/Original_reads_16S_ITS_18S
+OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/03_cleaned_data/Original_reads_16S_ITS_18S
 
 # Make the directory (mkdir) only if not existe already(-p)
 mkdir -p $OUTPUT
