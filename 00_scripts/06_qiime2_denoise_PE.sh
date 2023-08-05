@@ -389,8 +389,8 @@ mkdir -p $OUTPUT
 METADATA=/scratch_vol1/fungi/Coral_block_colonisation/98_database_files/sample-metadata_others_markers_Reu.tsv
 # negative control sample :
 #NEG_CONTROL=/scratch_vol1/fungi/Coral_block_colonisation/98_database_files/Negative_control_Sample_RepSeq_V4.qza
-#NEG_CONTROL=/scratch_vol1/fungi/Coral_block_colonisation/99_contamination
-NEG_CONTROL=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_negative_control/core/RepSeq_negative_control.qza
+NEG_CONTROL=/scratch_vol1/fungi/Coral_block_colonisation/99_contamination
+#NEG_CONTROL=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_negative_control/core/RepSeq_negative_control.qza
 
 TMPDIR=/scratch_vol1
 
@@ -446,12 +446,12 @@ qiime dada2 denoise-paired --i-demultiplexed-seqs core/demux.qza \
 # Paste them in a contamination_seq.fasta file, then :
  
 # qiime tools import \
-#  --input-path $NEG_CONTROL/contamination_seq_TUFA.fasta \
-#  --output-path $NEG_CONTROL/contamination_seq_TUFA.qza \
-#  --type 'FeatureData[Sequence]'
+  --input-path $NEG_CONTROL/contamination_seq_16S_ITS_18S.fasta \
+  --output-path $NEG_CONTROL/contamination_seq_16S_ITS_18S.qza \
+  --type 'FeatureData[Sequence]'
 
 qiime quality-control exclude-seqs --i-query-sequences core/RepSeq.qza \
-      					     --i-reference-sequences $NEG_CONTROL \
+      					     --i-reference-sequences $NEG_CONTROL/contamination_seq_16S_ITS_18S \
       					     --p-method vsearch \
       					     --p-threads 6 \
       					     --p-perc-identity 1.00 \
