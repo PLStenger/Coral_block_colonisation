@@ -445,13 +445,13 @@ qiime dada2 denoise-paired --i-demultiplexed-seqs core/demux.qza \
 # Blast them in order to catch non necessaries ASV (uncultured, unknown, etc..)
 # Paste them in a contamination_seq.fasta file, then :
  
-# qiime tools import \
+qiime tools import \
   --input-path $NEG_CONTROL/contamination_seq_16S_ITS_18S.fasta \
   --output-path $NEG_CONTROL/contamination_seq_16S_ITS_18S.qza \
   --type 'FeatureData[Sequence]'
 
 qiime quality-control exclude-seqs --i-query-sequences core/RepSeq.qza \
-      					     --i-reference-sequences $NEG_CONTROL/contamination_seq_16S_ITS_18S \
+      					     --i-reference-sequences $NEG_CONTROL/contamination_seq_16S_ITS_18S.qza \
       					     --p-method vsearch \
       					     --p-threads 6 \
       					     --p-perc-identity 1.00 \
