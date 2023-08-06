@@ -92,7 +92,7 @@ qiime diversity alpha-rarefaction \
   --i-phylogeny tree/rooted-tree.qza \
   --p-max-depth 22828 \
   --p-min-depth 1 \
-  --m-metadata-file $DATABASE/sample-metadata.tsv \
+  --m-metadata-file $DATABASE/sample-metadata_others_markers_NC.tsv \
   --o-visualization visual/alpha-rarefaction.qzv
   
 # Note: Interpreting alpha diversity metrics: it is important to understand that certain metrics are stricly qualitative (presence/absence), 
@@ -155,9 +155,9 @@ echo $TMPDIR
 qiime diversity alpha-rarefaction \
   --i-table core/Table.qza \
   --i-phylogeny tree/rooted-tree.qza \
-  --p-max-depth 139462 \
+  --p-max-depth 15001 \
   --p-min-depth 1 \
-  --m-metadata-file $DATABASE/sample-metadata.tsv \
+  --m-metadata-file $DATABASE/sample-metadata_others_markers_Reu.tsv \
   --o-visualization visual/alpha-rarefaction.qzv
   
 # Note: Interpreting alpha diversity metrics: it is important to understand that certain metrics are stricly qualitative (presence/absence), 
