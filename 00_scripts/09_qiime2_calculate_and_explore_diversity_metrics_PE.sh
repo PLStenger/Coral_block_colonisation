@@ -384,7 +384,7 @@ echo $TMPDIR
 qiime diversity core-metrics-phylogenetic \
        --i-phylogeny tree/rooted-tree.qza \
        --i-table core/Table.qza \
-       --p-sampling-depth 15496 \
+       --p-sampling-depth 2537 \
        --m-metadata-file $DATABASE/sample-metadata_others_markers_NC.tsv \
        --o-rarefied-table core/RarTable.qza \
        --o-observed-features-vector core/Vector-observed_asv.qza \
@@ -725,7 +725,7 @@ echo $TMPDIR
 qiime diversity core-metrics-phylogenetic \
        --i-phylogeny tree/rooted-tree.qza \
        --i-table core/Table.qza \
-       --p-sampling-depth 15496 \
+       --p-sampling-depth 1667 \
        --m-metadata-file $DATABASE/sample-metadata_others_markers_Reu.tsv \
        --o-rarefied-table core/RarTable.qza \
        --o-observed-features-vector core/Vector-observed_asv.qza \
