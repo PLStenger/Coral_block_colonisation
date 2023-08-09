@@ -7,6 +7,73 @@
 ###############################################################
 
 
+
+
+WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC
+OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC/visual
+
+DATABASE=/scratch_vol1/fungi/Coral_block_colonisation/98_database_files
+TMPDIR=/scratch_vol1
+
+# Aim: perform diversity metrics and rarefaction
+
+# https://chmi-sops.github.io/mydoc_qiime2.html#step-8-calculate-and-explore-diversity-metrics
+# https://docs.qiime2.org/2018.2/tutorials/moving-pictures/#alpha-rarefaction-plotting
+# https://forum.qiime2.org/t/how-to-decide-p-sampling-depth-value/3296/6
+
+# Use QIIME2’s diversity core-metrics-phylogenetic function to calculate a whole bunch of diversity metrics all at once. 
+# Note that you should input a sample-depth value based on the alpha-rarefaction analysis that you ran before.
+
+# sample-depth value choice : 
+# We are ideally looking for a sequencing depth at the point where these rarefaction curves begin to level off (indicating that most of the relevant diversity has been captured).
+# This helps inform tough decisions that we need to make when some samples have lower sequence counts and we need to balance the priorities that you want to choose 
+# a value high enough that you capture the diversity present in samples with high counts, but low enough that you don’t get rid of a ton of your samples.
+
+cd $WORKING_DIRECTORY
+
+eval "$(conda shell.bash hook)"
+conda activate qiime2-2021.4
+
+# Make the directory (mkdir) only if not existe already(-p)
+mkdir -p pcoa
+mkdir -p export/pcoa
+
+# I'm doing this step in order to deal the no space left in cluster :
+export TMPDIR='/scratch_vol1/fungi'
+echo $TMPDIR
+
+# core_metrics_phylogenetic:
+############################
+    # Aim: Applies a collection of diversity metrics to a feature table
+    # Use: qiime diversity core-metrics-phylogenetic [OPTIONS]
+    
+    # With 4202 -> 0 samples deleted
+
+qiime diversity core-metrics-phylogenetic \
+       --i-phylogeny tree/rooted-tree.qza \
+       --i-table core/Table.qza \
+       --p-sampling-depth 2537 \
+       --m-metadata-file $DATABASE/sample-metadata_others_markers_NC.tsv \
+       --o-rarefied-table core/RarTable.qza \
+       --o-observed-features-vector core/Vector-observed_asv.qza \
+       --o-shannon-vector core/Vector-shannon.qza \
+       --o-evenness-vector core/Vector-evenness.qza \
+       --o-faith-pd-vector core/Vector-faith_pd.qza \
+       --o-jaccard-distance-matrix core/Matrix-jaccard.qza \
+       --o-bray-curtis-distance-matrix core/Matrix-braycurtis.qza \
+       --o-unweighted-unifrac-distance-matrix core/Matrix-unweighted_unifrac.qza \
+       --o-weighted-unifrac-distance-matrix core/Matrix-weighted_unifrac.qza \
+       --o-jaccard-pcoa-results pcoa/PCoA-jaccard.qza \
+       --o-bray-curtis-pcoa-results pcoa/PCoA-braycurtis.qza \
+       --o-unweighted-unifrac-pcoa-results pcoa/PCoA-unweighted_unifrac.qza \
+       --o-weighted-unifrac-pcoa-results pcoa/PCoA-weighted_unifrac.qza \
+       --o-jaccard-emperor visual/Emperor-jaccard.qzv \
+       --o-bray-curtis-emperor visual/Emperor-braycurtis.qzv \
+       --o-unweighted-unifrac-emperor visual/Emperor-unweighted_unifrac.qzv \
+       --o-weighted-unifrac-emperor visual/Emperor-weighted_unifrac.qzv
+
+
+
 WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC
 OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC/visual
 
@@ -225,4 +292,59 @@ qiime tools export --input-path taxonomy/16S/taxonomy_reads-per-batch_RarRepSeq.
 qiime tools export --input-path taxonomy/16S/taxonomy_reads-per-batch_RepSeq.qza --output-path export/taxonomy/16S/taxonomy_reads-per-batch_RepSeq
 qiime tools export --input-path taxonomy/16S/taxonomy_reads-per-batch_ConRepSeq.qza --output-path export/taxonomy/16S/taxonomy_reads-per-batch_ConRepSeq
 qiime tools export --input-path taxonomy/16S/taxonomy_reads-per-batch_RarRepSeq.qza --output-path export/taxonomy/16S/taxonomy_reads-per-batch_RarRepSeq
+
+
+
+
+
+
+
+WORKING_DIRECTORY=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC
+OUTPUT=/scratch_vol1/fungi/Coral_block_colonisation/05_QIIME2/Original_reads_16S_ITS_18S_NC/visual
+
+DATABASE=/scratch_vol1/fungi/Coral_block_colonisation/98_database_files
+TMPDIR=/scratch_vol1
+
+###############################################################
+### For TUFA
+###############################################################
+
+cd $WORKING_DIRECTORY
+
+eval "$(conda shell.bash hook)"
+conda activate qiime2-2021.4
+
+# Make the directory (mkdir) only if not existe already(-p)
+mkdir -p subtables
+mkdir -p export/subtables
+
+# I'm doing this step in order to deal the no space left in cluster :
+export TMPDIR='/scratch_vol1/fungi'
+echo $TMPDIR
+
+# Aim: Filter sample from table based on a feature table or metadata
+
+#qiime feature-table filter-samples \
+#        --i-table core/RarTable.qza \
+#        --m-metadata-file $DATABASE/sample-metadata.tsv \'
+#        --p-where "[#SampleID] IN ('1-COP-COR1', '1-COP-COR2', '1-COP-COR3', '1-COP-EAU1', '1-COP-EAU2', '1-COP-EAU3', '1-COP-SED1', '1-COP-SED2', '1-COP-SED3', '1-LIV-COR1', '1-LIV-COR2', '1-LIV-COR3', '1-LIV-EAU1', '1-LIV-EAU2', '1-LIV-EAU3', '1-LIV-SED1', '1-LIV-SED2', '1-LIV-SED3', '1-TOB-COR1', '1-TOB-COR2', '1-TOB-COR3', '1-TOB-EAU1', '1-TOB-EAU2', '1-TOB-EAU3', '1-TOB-SED1', '1-TOB-SED2', '1-TOB-SED3', '2-COP-COR1', '2-COP-COR2', '2-COP-COR3', '2-COP-EAU1', '2-COP-EAU2', '2-COP-EAU3', '2-COP-SED1', '2-COP-SED2', '2-COP-SED3', '2-LIV-COR1', '2-LIV-COR2', '2-LIV-COR3', '2-LIV-EAU1', '2-LIV-EAU2', '2-LIV-EAU3', '2-LIV-SED1', '2-LIV-SED2', '2-LIV-SED3', '2-TOB-COR1', '2-TOB-COR2', '2-TOB-COR3', '2-TOB-EAU1', '2-TOB-EAU2', '2-TOB-EAU3', '2-TOB-SED1', '2-TOB-SED2', '2-TOB-SED3', 'CONTROL')"  \
+#        --o-filtered-table subtables/RarTable-all.qza
+        
+mv core/RarTable.qza subtables/RarTable-all.qza
+
+ 
+# Aim: Identify "core" features, which are features observed,
+     # in a user-defined fraction of the samples
+        
+qiime feature-table core-features \
+        --i-table subtables/RarTable-all.qza \
+        --p-min-fraction 0.1 \
+        --p-max-fraction 1.0 \
+        --p-steps 10 \
+        --o-visualization visual/CoreBiom-all.qzv  
+        
+qiime tools export --input-path subtables/RarTable-all.qza --output-path export/subtables/RarTable-all    
+qiime tools export --input-path visual/CoreBiom-all.qzv --output-path export/visual/CoreBiom-all
+biom convert -i export/subtables/RarTable-all/feature-table.biom -o export/subtables/RarTable-all/table-from-biom.tsv --to-tsv
+sed '1d ; s/\#OTU ID/ASV_ID/' export/subtables/RarTable-all/table-from-biom.tsv > export/subtables/RarTable-all/ASV.tsv
 
